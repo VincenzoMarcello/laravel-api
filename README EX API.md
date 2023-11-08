@@ -33,4 +33,33 @@ Gestire la paginazione dei risultati
 
 # SVOLGIMENTO
 
-Nei precedenti esercizi abbiamo stampato i projects in una tabella a schermo nell'index quello che vogliamo fare è spostare la parte grafica nel front-office quindi in vue+vite, quindi dobbiamo fare un API e creare una nuova repository che sarà in Vue+vite e riceverà da questa repository tramite API del jason che conterrà i vari projects.
+-   Nei precedenti esercizi abbiamo stampato i projects in una tabella a schermo nell'index quello che vogliamo fare è spostare la parte grafica nel front-office quindi in vue+vite, quindi dobbiamo fare un API e creare una nuova repository che sarà in Vue+vite e riceverà da questa repository tramite API del jason che conterrà i vari projects.
+
+-   per prima cosa andiamo in api.php e togliamo la rotta dell'autenticazione che non ci serve.
+-   ci creiamo un un resource controller per l'API che esclude il create e l'edit:
+
+```
+php artisan make:controller Api\ProjectController --api
+```
+
+-   fatto il controller in api.php dobbiamo scrivere le rotte:
+
+```php
+// # CI IMPORTIAMO IL CONTROLLER DELL'API
+use App\Http\Controllers\Api\ProjectController;
+
+// # ROTTA DELL'API CONTROLLER RESOURCE CHE USA SOLO DUE ROTTE INDEX E SHOW
+Route::apiResource("projects", ProjectController::class)->only(["index", "show"]);
+```
+
+-   poi andiamo nel metodo index del Api\ProjectController:
+
+```php
+    public function index()
+    {
+        $projects = Project::select("id", "name", "link", "type_id", "description", "cover_image")
+            ->paginate(20);
+
+        return response()->json($projects);
+    }
+```
