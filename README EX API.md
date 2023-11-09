@@ -63,3 +63,5 @@ Route::apiResource("projects", ProjectController::class)->only(["index", "show"]
         return response()->json($projects);
     }
 ```
+
+-   ora apriamoci un nuova repo in vue+vie 'vite-boolfolio' che sarà il nostro front-office
