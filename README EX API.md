@@ -64,4 +64,16 @@ Route::apiResource("projects", ProjectController::class)->only(["index", "show"]
     }
 ```
 
--   ora apriamoci un nuova repo in vue+vie 'vite-boolfolio' che sarà il nostro front-office
+-   ora apriamoci un nuova repo in vue+vie 'vite-boolfolio' che sarà il nostro front-office.
+
+-   come abbiamo detto nell'esercizio del front-office dobbiamo passare le tecnologies e i types
+    quindi andiamo in Api/ProjectController.php
+
+```php
+    // AGGIUNGIAMO IL WITH ALLA INDEX E GLI DICIAMO CHE COLONNE DEVE PRENDERE
+    $projects = Project::select("id", "name", "link", "type_id", "description", "cover_image")
+         ->with('type:id,label,color', 'technologies:id,label,color', ) <-----
+         ->paginate(12);
+```
+
+-   possiamo tornare sul front-office.

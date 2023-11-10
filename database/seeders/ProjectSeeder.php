@@ -31,9 +31,9 @@ class ProjectSeeder extends Seeder
         // # CI FACCIAMO UN VARIABILE CHE PRENDE TUTTI GLI OGGETTI TYPE E CON IL pluck('id)
         // # ANDIAMO A PRENDERE TUTTI GLI ID NEL TYPE QUINDI SI CREERA' UN ARRAY DI ID
         $type_ids = Type::all()->pluck('id');
-        // # SICCOME VOGLIAMO ANCHE DEI VALORI NULL ANDIAMO AD AGGIUNGERE ALL'ARRAY DI ID
+        // # SE VOLESSIMO ANCHE DEI VALORI NULL ANDIAMO AD AGGIUNGERE ALL'ARRAY DI ID
         // # ANCHE UN VALORE NULL [1,2,3,..,null]
-        $type_ids[] = null;
+        // $type_ids[] = null;
 
         $technology_ids = Technology::all()->pluck('id');
 
