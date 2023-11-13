@@ -77,3 +77,19 @@ Route::apiResource("projects", ProjectController::class)->only(["index", "show"]
 ```
 
 -   possiamo tornare sul front-office.
+-   aggiungiamo questo nella show per il dettaglio della pagina
+
+```php
+    public function show($id)
+    {
+    $project = Project::select("id", "name", "link", "type_id", "description", "cover_image")
+    ->where('id', $id)
+    ->with('type:id,label,color', 'technologies:id,label,color', )
+    ->first();
+
+          return response()->json($project);
+
+    }
+```
+
+-   possiamo tornare sul front-office.
